@@ -1,36 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Quote, Star, Users, MessageSquare, ArrowRight } from 'lucide-react';
+import { Building2, Globe, Cpu, Layers, MessageSquare, ArrowRight, ShieldCheck, Zap } from 'lucide-react';
 
-const testimonials = [
-  {
-    name: "Dr. Rajesh Kumar",
-    role: "Director, Kelkem India Pvt Ltd",
-    content: "BN INTELHUB transformed our digital presence with their innovative software solutions. Their team's technical expertise and commitment to excellence are truly world-class.",
-    rating: 5,
-    image: "https://picsum.photos/seed/person1/100/100"
-  },
-  {
-    name: "Sarah Williams",
-    role: "Principal, AJIS",
-    content: "The EdTech solutions provided by BN INTELHUB have revolutionized how we interact with our students. Their platform is intuitive, scalable, and highly effective.",
-    rating: 5,
-    image: "https://picsum.photos/seed/person2/100/100"
-  },
-  {
-    name: "Amit Singh",
-    role: "CTO, TechVision Global",
-    content: "Working with BN INTELHUB was a seamless experience. They understood our complex requirements and delivered a robust cloud infrastructure that exceeded our expectations.",
-    rating: 5,
-    image: "https://picsum.photos/seed/person3/100/100"
-  },
-  {
-    name: "Priya Sharma",
-    role: "Founder, EduNext",
-    content: "Their training programs are exceptional. They bridge the gap between theoretical knowledge and industry requirements perfectly. Highly recommended for any aspiring professional.",
-    rating: 5,
-    image: "https://picsum.photos/seed/person4/100/100"
-  }
+const clients = [
+  { name: "Kelkem India Pvt Ltd", logo: "https://picsum.photos/seed/kelkem/300/150", industry: "Manufacturing" },
+  { name: "AJIS International", logo: "https://picsum.photos/seed/ajis/300/150", industry: "Education" },
+  { name: "TechVision Global", logo: "https://picsum.photos/seed/techvision/300/150", industry: "Technology" },
+  { name: "EduNext Systems", logo: "https://picsum.photos/seed/edunext/300/150", industry: "EdTech" },
+  { name: "Global Solutions", logo: "https://picsum.photos/seed/global/300/150", industry: "Consulting" },
+  { name: "Innovate AI", logo: "https://picsum.photos/seed/innovate/300/150", industry: "Artificial Intelligence" },
+  { name: "Future Soft", logo: "https://picsum.photos/seed/future/300/150", industry: "Software" },
+  { name: "Cloud Nine", logo: "https://picsum.photos/seed/cloud/300/150", industry: "Cloud Services" },
 ];
 
 export const Insights: React.FC = () => {
@@ -50,13 +30,13 @@ export const Insights: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-bold uppercase tracking-widest mb-6">
-              <MessageSquare size={14} /> Client Insights
+              <Building2 size={14} /> Global Partnerships
             </div>
             <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 tracking-tight">
-              Voices of <span className="text-gradient">Success</span>
+              Trusted by <span className="text-gradient">Industry Leaders</span>
             </h1>
             <p className="text-white/60 text-lg max-w-2xl mx-auto">
-              Discover how BN INTELHUB is empowering businesses and educational institutions through innovative technology and strategic insights.
+              We collaborate with forward-thinking brands and institutions to build the next generation of digital excellence.
             </p>
           </motion.div>
         </div>
@@ -64,10 +44,10 @@ export const Insights: React.FC = () => {
         {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-24">
           {[
-            { icon: Users, label: "Happy Clients", value: "150+" },
-            { icon: Star, label: "Average Rating", value: "4.9/5" },
-            { icon: Quote, label: "Testimonials", value: "50+" },
-            { icon: ArrowRight, label: "Success Rate", value: "99%" }
+            { icon: Globe, label: "Global Reach", value: "12+ Countries" },
+            { icon: ShieldCheck, label: "Trusted Brands", value: "150+" },
+            { icon: Zap, label: "Projects Delivered", value: "500+" },
+            { icon: ArrowRight, label: "Client Retention", value: "95%" }
           ].map((stat, i) => (
             <motion.div
               key={i}
@@ -86,45 +66,32 @@ export const Insights: React.FC = () => {
           ))}
         </div>
 
-        {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {testimonials.map((testimonial, i) => (
+        {/* Client Logos Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {clients.map((client, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="glass p-10 rounded-[3rem] border border-white/5 relative group hover:border-brand-primary/20 transition-all"
+              transition={{ delay: i * 0.05 }}
+              className="glass p-8 rounded-[2rem] border border-white/5 flex flex-col items-center justify-center group hover:border-brand-primary/40 transition-all relative overflow-hidden"
             >
-              <div className="absolute top-8 right-10 text-brand-primary/10 group-hover:text-brand-primary/20 transition-colors">
-                <Quote size={80} />
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              
+              <div className="w-full aspect-[3/2] rounded-xl overflow-hidden mb-6 bg-white/5 flex items-center justify-center p-4">
+                <img 
+                  src={client.logo} 
+                  alt={client.name} 
+                  className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500 scale-90 group-hover:scale-100"
+                  referrerPolicy="no-referrer"
+                />
               </div>
               
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-brand-primary/20">
-                  <img 
-                    src={testimonial.image} 
-                    alt={testimonial.name} 
-                    className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold">{testimonial.name}</h3>
-                  <p className="text-brand-primary text-sm font-medium">{testimonial.role}</p>
-                </div>
+              <div className="text-center relative z-10">
+                <h3 className="text-white font-bold text-sm mb-1 group-hover:text-brand-primary transition-colors">{client.name}</h3>
+                <p className="text-white/40 text-[10px] uppercase tracking-widest font-mono">{client.industry}</p>
               </div>
-
-              <div className="flex gap-1 mb-6">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} size={16} className="fill-brand-primary text-brand-primary" />
-                ))}
-              </div>
-
-              <p className="text-white/60 leading-relaxed italic relative z-10">
-                "{testimonial.content}"
-              </p>
             </motion.div>
           ))}
         </div>

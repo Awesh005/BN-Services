@@ -12,6 +12,8 @@ import { Contact } from './pages/Contact';
 import { Ecosystem } from './pages/Ecosystem';
 import { HireUs } from './pages/HireUs';
 import { Insights } from './pages/Insights';
+import Testimony from './pages/Testimony';
+import { WhatsAppButton } from './components/WhatsAppButton';
 
 export default function App() {
   const { scrollYProgress } = useScroll();
@@ -43,10 +45,12 @@ export default function App() {
             <Route path="/ecosystem" element={<Ecosystem />} />
             <Route path="/hire-us" element={<HireUs />} />
             <Route path="/insights" element={<Insights />} />
+            <Route path="/testimony" element={<Testimony />} />
             <Route path="*" element={<Home />} />
           </Routes>
 
           <Footer />
+          <WhatsAppButton />
         </div>
       </ClickSpark>
     </Router>

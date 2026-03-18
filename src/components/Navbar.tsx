@@ -75,9 +75,10 @@ export function Navbar() {
   ];
 
   const companyLinks = [
-    { name: 'About Us', path: '/about-us', desc: 'Learn about our mission, vision and core values.' },
-    { name: 'Founder Message', path: '/founder-message', desc: 'A personal message from our leadership.' },
-    { name: 'Our Projects', path: '/our-projects', desc: 'Explore our portfolio of successful deliveries.' }
+    { name: 'About Us', path: '/about-us' },
+    { name: 'Founder Message', path: '/founder-message' },
+    { name: 'Our Projects', path: '/our-projects' },
+    { name: 'Testimony', path: '/testimony' }
   ];
   const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
@@ -243,30 +244,23 @@ export function Navbar() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
             onMouseEnter={handleCompanyEnter}
             onMouseLeave={handleCompanyLeave}
-            className="absolute left-1/2 -translate-x-1/2 top-full mt-2 z-40 hidden md:block w-full max-w-2xl"
+            className="absolute left-[45%] -translate-x-1/2 top-full mt-2 z-40 hidden md:block w-64"
           >
-            <div className="bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-black/5 p-8">
-              <div className="grid grid-cols-1 gap-4">
+            <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-black/5 p-2">
+              <div className="flex flex-col">
                 {companyLinks.map((link) => (
                   <Link
                     key={link.name}
                     to={link.path}
-                    className="group flex items-center justify-between p-6 rounded-3xl hover:bg-brand-primary/5 transition-all"
+                    className="group flex items-center gap-2 px-5 py-3.5 rounded-2xl hover:translate-x-1 transition-all duration-200"
                   >
-                    <div className="flex flex-col gap-1">
-                      <span className="text-black font-display font-bold text-lg group-hover:text-brand-primary transition-colors">
-                        {link.name}
-                      </span>
-                      <span className="text-black/40 text-sm">
-                        {link.desc}
-                      </span>
-                    </div>
-                    <div className="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center group-hover:bg-brand-primary group-hover:text-black transition-all">
-                      <ArrowRight size={18} />
-                    </div>
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <span className="text-black/60 font-display font-bold text-xs uppercase tracking-wider group-hover:text-brand-secondary transition-colors">
+                      {link.name}
+                    </span>
                   </Link>
                 ))}
               </div>

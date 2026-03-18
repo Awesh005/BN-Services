@@ -98,13 +98,18 @@ export function Footer() {
                   Industrial Area, Namkum Ranchi - 834010
                 </a>
               </li>
-              <li className="flex items-center gap-4 group">
+              <li className="flex items-start gap-4 group">
                 <div className="w-10 h-10 rounded-xl glass flex items-center justify-center text-brand-primary shrink-0 group-hover:scale-110 transition-transform">
                   <Phone size={18} />
                 </div>
-                <a href="tel:+918936078905" className="text-sm text-white/40 hover:text-white transition-colors">
-                  +91 8936078905
-                </a>
+                <div className="flex flex-col gap-1">
+                  <a href="tel:+918936078905" className="text-sm text-white/40 hover:text-white transition-colors">
+                    +91 8936078905
+                  </a>
+                  <a href="tel:+919041289863" className="text-sm text-white/40 hover:text-white transition-colors">
+                    +91 90412 89863
+                  </a>
+                </div>
               </li>
               <li className="flex items-start gap-4 group">
                 <div className="w-10 h-10 rounded-xl glass flex items-center justify-center text-brand-primary shrink-0 group-hover:scale-110 transition-transform">
