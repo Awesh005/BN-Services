@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { slugify } from '../data/servicesData';
 import { AIButton } from './AIButton';
-import { Chatbot } from './Chatbot';
+import { ChatBot } from './ChatBot';
 
 const serviceCategories = [
   {
@@ -58,7 +58,6 @@ const serviceCategories = [
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isAIChatOpen, setIsAIChatOpen] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isServicesHovered, setIsServicesHovered] = useState(false);
   const [isCompanyHovered, setIsCompanyHovered] = useState(false);
@@ -115,6 +114,10 @@ export function Navbar() {
   };
   const handleCompanyLeave = () => setIsCompanyHovered(false);
 
+  const handleAIChatToggle = () => {
+    window.dispatchEvent(new CustomEvent('open-ai-chat'));
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-6" onMouseLeave={() => { handleServicesLeave(); handleCompanyLeave(); }}>
       <div className="max-w-7xl mx-auto flex items-center justify-between glass px-8 py-3 rounded-full border border-white/10">
@@ -126,7 +129,7 @@ export function Navbar() {
             referrerPolicy="no-referrer"
           />
         </Link>
-
+ 
         <div className="hidden md:flex items-center gap-2 relative">
           {/* Sliding Pill Background */}
           <motion.div
@@ -142,9 +145,9 @@ export function Navbar() {
               damping: 30,
             }}
           />
-
-          <AIButton onClick={() => setIsAIChatOpen(true)} className="mr-2" />
-
+ 
+          <AIButton onClick={handleAIChatToggle} className="mr-2" />
+ 
           {navItems.map((item, index) => (
             <Link 
               key={item.name} 
@@ -182,9 +185,9 @@ export function Navbar() {
             </button>
           </Link>
         </div>
-
+ 
         <div className="md:hidden flex items-center gap-4">
-          <AIButton onClick={() => setIsAIChatOpen(true)} />
+          <AIButton onClick={handleAIChatToggle} />
           <button 
             className="text-white p-2"
             onClick={() => setIsOpen(!isOpen)}
@@ -193,10 +196,7 @@ export function Navbar() {
           </button>
         </div>
       </div>
-
-      {/* AI Chatbot */}
-      <Chatbot isOpen={isAIChatOpen} onClose={() => setIsAIChatOpen(false)} />
-
+ 
       {/* Mega Menu Dropdown */}
       <AnimatePresence>
         {isServicesHovered && (
@@ -278,7 +278,7 @@ export function Navbar() {
             exit={{ opacity: 0, y: -10 }}
             className="md:hidden mt-3 glass rounded-3xl p-6 flex flex-col gap-4 border border-white/10 overflow-hidden"
           >
-            <AIButton onClick={() => setIsAIChatOpen(true)} className="w-fit" />
+            <AIButton onClick={handleAIChatToggle} className="w-fit" />
             {navItems.map((item) => (
               <div key={item.name} className="flex flex-col">
                 <button 

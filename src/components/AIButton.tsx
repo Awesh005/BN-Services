@@ -13,16 +13,19 @@ export const AIButton: React.FC<AIButtonProps> = ({ onClick, className = "" }) =
       onClick={onClick}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className={`relative group flex items-center justify-center p-[1.5px] rounded-full overflow-hidden transition-all duration-300 shadow-[0_0_10px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] ${className}`}
+      className={`relative group flex items-center justify-center p-[1.5px] rounded-full overflow-hidden transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] ${className}`}
     >
-      {/* Animated Gradient Border */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 via-pink-500 to-cyan-400 animate-rotate-gradient opacity-80 group-hover:opacity-100" />
+      {/* Purple Border Glow Effect */}
+      <div className="absolute inset-0 rounded-full border-2 border-[#8B5CF6] opacity-80 group-hover:opacity-100 shadow-[0_0_10px_rgba(139,92,246,0.3)] transition-all duration-300" />
       
       {/* Inner Dark Background */}
-      <div className="relative flex items-center gap-1.5 px-4 py-1.5 bg-[#050505] rounded-full z-10">
-        <Sparkles size={12} className="text-cyan-400 group-hover:animate-pulse" />
-        <span className="text-[11px] font-display font-bold uppercase tracking-[0.2em] text-white">
+      <div className="relative flex flex-col items-center justify-center w-10 h-10 bg-[#050505] rounded-full z-10 -space-y-1">
+        <Sparkles size={12} className="text-[#22D3EE] drop-shadow-[0_0_5px_rgba(34,211,238,0.5)] group-hover:animate-pulse" />
+        <span className="text-[8px] font-display font-black tracking-tighter text-white relative">
           AI
+          {/* Glitch Effect Layers */}
+          <span className="absolute inset-0 text-[#FF0080] opacity-0 group-hover:opacity-70 group-hover:translate-x-[1px] group-hover:translate-y-[-1px] transition-all duration-100 mix-blend-screen pointer-events-none">AI</span>
+          <span className="absolute inset-0 text-[#00FFFF] opacity-0 group-hover:opacity-70 group-hover:translate-x-[-1px] group-hover:translate-y-[1px] transition-all duration-100 mix-blend-screen pointer-events-none">AI</span>
         </span>
       </div>
     </motion.button>

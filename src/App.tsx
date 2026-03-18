@@ -14,6 +14,7 @@ import { HireUs } from './pages/HireUs';
 import { Insights } from './pages/Insights';
 import Testimony from './pages/Testimony';
 import { WhatsAppButton } from './components/WhatsAppButton';
+import { ChatBot } from './components/ChatBot';
 
 export default function App() {
   const { scrollYProgress } = useScroll();
@@ -51,6 +52,7 @@ export default function App() {
 
           <Footer />
           <WhatsAppButton />
+          <ChatBot />
         </div>
       </ClickSpark>
     </Router>
