@@ -25,7 +25,7 @@ const packages = [
     particulars: 'Semi Customized Web.',
     pages: '8',
     rate: '12000/-',
-    adminPanel: 'Yes (3 page Dynamic)'
+    adminPanel: 'Yes'
   },
   {
     sNo: 4,
@@ -33,7 +33,7 @@ const packages = [
     particulars: 'Customized Website',
     pages: '10 to 12',
     rate: '14000/-',
-    adminPanel: 'Yes (6 page Dynamic)'
+    adminPanel: 'Yes '
   },
   {
     sNo: 5,

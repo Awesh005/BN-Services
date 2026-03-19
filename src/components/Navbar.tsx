@@ -70,7 +70,7 @@ export function Navbar() {
     { name: 'Company', path: '#' },
     { name: 'Insights', path: '/insights' },
     { name: 'Contact', path: '/contact' },
-    { name: 'Ecosystem', path: '/ecosystem' }
+    { name: 'Courses', path: 'https://bnintelhub.com', external: true }
   ];
 
   const companyLinks = [
@@ -149,32 +149,53 @@ export function Navbar() {
           <AIButton onClick={handleAIChatToggle} className="mr-2" />
  
           {navItems.map((item, index) => (
-            <Link 
-              key={item.name} 
-              ref={(el) => { itemRefs.current[index] = el; }}
-              to={item.path}
-              onMouseEnter={() => {
-                setHoveredIndex(index);
-                if (item.name === 'Services') handleServicesEnter();
-                else if (item.name === 'Company') handleCompanyEnter();
-                else { handleServicesLeave(); handleCompanyLeave(); }
-              }}
-              onMouseLeave={() => setHoveredIndex(null)}
-              className={`relative z-10 px-6 py-2 text-[11px] font-display font-bold uppercase tracking-[0.2em] transition-colors duration-300 flex items-center gap-1 ${
-                hoveredIndex === index ? 'text-black' : 'text-white/60 hover:text-white'
-              }`}
-            >
-              {item.name}
-              {(item.name === 'Services' || item.name === 'Company') && (
-                <ChevronDown 
-                  size={12} 
-                  className={`transition-transform duration-300 ${
-                    (item.name === 'Services' && isServicesHovered) || (item.name === 'Company' && isCompanyHovered) 
-                    ? 'rotate-180' : ''
-                  }`} 
-                />
-              )}
-            </Link>
+            item.external ? (
+              <a
+                key={item.name}
+                ref={(el) => { itemRefs.current[index] = el; }}
+                href={item.path}
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseEnter={() => {
+                  setHoveredIndex(index);
+                  handleServicesLeave();
+                  handleCompanyLeave();
+                }}
+                onMouseLeave={() => setHoveredIndex(null)}
+                className={`relative z-10 px-6 py-2 text-[11px] font-display font-bold uppercase tracking-[0.2em] transition-colors duration-300 flex items-center gap-1 ${
+                  hoveredIndex === index ? 'text-black' : 'text-white/60 hover:text-white'
+                }`}
+              >
+                {item.name}
+              </a>
+            ) : (
+              <Link 
+                key={item.name} 
+                ref={(el) => { itemRefs.current[index] = el; }}
+                to={item.path}
+                onMouseEnter={() => {
+                  setHoveredIndex(index);
+                  if (item.name === 'Services') handleServicesEnter();
+                  else if (item.name === 'Company') handleCompanyEnter();
+                  else { handleServicesLeave(); handleCompanyLeave(); }
+                }}
+                onMouseLeave={() => setHoveredIndex(null)}
+                className={`relative z-10 px-6 py-2 text-[11px] font-display font-bold uppercase tracking-[0.2em] transition-colors duration-300 flex items-center gap-1 ${
+                  hoveredIndex === index ? 'text-black' : 'text-white/60 hover:text-white'
+                }`}
+              >
+                {item.name}
+                {(item.name === 'Services' || item.name === 'Company') && (
+                  <ChevronDown 
+                    size={12} 
+                    className={`transition-transform duration-300 ${
+                      (item.name === 'Services' && isServicesHovered) || (item.name === 'Company' && isCompanyHovered) 
+                      ? 'rotate-180' : ''
+                    }`} 
+                  />
+                )}
+              </Link>
+            )
           ))}
           
           <div className="h-6 w-[1px] bg-white/10 mx-2" />
@@ -285,6 +306,9 @@ export function Navbar() {
                   onClick={() => {
                     if (item.name === 'Services' || item.name === 'Company') {
                       setActiveAccordion(activeAccordion === item.name ? null : item.name);
+                    } else if (item.external) {
+                      window.open(item.path, '_blank', 'noopener,noreferrer');
+                      setIsOpen(false);
                     } else {
                       setIsOpen(false);
                     }

@@ -1,22 +1,41 @@
 import { motion } from 'motion/react';
-import { Building2, Globe, ShieldCheck, Zap, MessageSquare } from 'lucide-react';
+import { Building2, Globe, ShieldCheck, Zap, MessageSquare, ArrowUpRight } from 'lucide-react';
+import { projectsData } from '../data/projectsData';
 
-const clients = [
-  { name: "Kelkem India Pvt Ltd", logo: "https://picsum.photos/seed/kelkem/400/200", industry: "Manufacturing", location: "India" },
-  { name: "AJIS International", logo: "https://picsum.photos/seed/ajis/400/200", industry: "Education", location: "Global" },
-  { name: "TechVision Global", logo: "https://picsum.photos/seed/techvision/400/200", industry: "Technology", location: "USA" },
-  { name: "EduNext Systems", logo: "https://picsum.photos/seed/edunext/400/200", industry: "EdTech", location: "UK" },
-  { name: "Global Solutions", logo: "https://picsum.photos/seed/global/400/200", industry: "Consulting", location: "Singapore" },
-  { name: "Innovate AI", logo: "https://picsum.photos/seed/innovate/400/200", industry: "AI Research", location: "Germany" },
-  { name: "Future Soft", logo: "https://picsum.photos/seed/future/400/200", industry: "Software", location: "Canada" },
-  { name: "Cloud Nine", logo: "https://picsum.photos/seed/cloud/400/200", industry: "Cloud Infrastructure", location: "Australia" },
+const uniqueClients = Array.from(new Set(projectsData.map((project) => project.client)));
+const liveProjects = projectsData.filter((project) => project.url && project.url !== '#');
+const websiteProjects = projectsData.filter((project) => project.category === 'Website');
+const clientFeedback = [
+  {
+    client: 'AJIS Group',
+    role: 'School Management Team',
+    quote:
+      'BN INTELHUB delivered a structured platform that made student access, academic updates, and communication significantly smoother for our team.',
+  },
+  {
+    client: 'Creative Collective',
+    role: 'Brand & Content Team',
+    quote:
+      'The Humble Muse needed a polished digital experience, and the final product balanced storytelling, commerce, and usability without overcomplicating the flow.',
+  },
+  {
+    client: 'Kelkem India',
+    role: 'Operations Leadership',
+    quote:
+      'Their execution was practical and business-focused. The website and operational thinking reflected a clear understanding of industrial requirements.',
+  },
+  {
+    client: 'Carzmo',
+    role: 'Product Team',
+    quote:
+      'We needed speed, clarity, and a cleaner user journey. BN INTELHUB helped shape a platform that feels more usable and more ready for growth.',
+  },
 ];
 
 export default function Testimony() {
   return (
     <div className="min-h-screen pt-32 pb-20 px-6">
       <div className="max-w-7xl mx-auto">
-        {/* Header Section */}
         <div className="mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -25,45 +44,44 @@ export default function Testimony() {
           >
             <div className="w-12 h-[1px] bg-brand-primary" />
             <span className="text-brand-primary font-mono text-xs font-bold uppercase tracking-[0.3em]">
-              Our Network
+              Client Proof
             </span>
           </motion.div>
-          
+
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="text-6xl md:text-8xl font-display font-bold text-white tracking-tighter leading-[0.9] mb-8"
           >
-            GLOBAL <br />
-            <span className="text-white/20">PARTNERSHIPS.</span>
+            TRUST BUILT <br />
+            <span className="text-white/20">THROUGH DELIVERY.</span>
           </motion.h1>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="text-white/50 text-lg max-w-2xl leading-relaxed"
           >
-            We collaborate with industry leaders and visionary institutions worldwide. 
-            Our clients represent the pinnacle of innovation across diverse sectors.
+            These are not placeholder partnerships. Each card reflects a real BN INTELHUB engagement,
+            from education platforms to industrial websites and product-led digital experiences.
           </motion.p>
         </div>
 
-        {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
           {[
-            { label: "Active Clients", value: "150+", icon: Building2 },
-            { label: "Countries", value: "12+", icon: Globe },
-            { label: "Success Rate", value: "99%", icon: ShieldCheck },
-            { label: "Projects", value: "500+", icon: Zap },
-          ].map((stat, i) => (
+            { label: 'Projects Featured', value: `${projectsData.length}`, icon: Building2 },
+            { label: 'Live Deployments', value: `${liveProjects.length}`, icon: Globe },
+            { label: 'Website Builds', value: `${websiteProjects.length}`, icon: ShieldCheck },
+            { label: 'Client Accounts', value: `${uniqueClients.length}`, icon: Zap },
+          ].map((stat, index) => (
             <motion.div
-              key={i}
+              key={stat.label}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              transition={{ delay: index * 0.1 }}
               className="glass p-6 rounded-3xl border border-white/5 flex flex-col items-center text-center"
             >
               <stat.icon className="text-brand-primary mb-3" size={24} />
@@ -73,43 +91,92 @@ export default function Testimony() {
           ))}
         </div>
 
-        {/* Client Logos Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {clients.map((client, index) => (
-            <motion.div
-              key={client.name}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {projectsData.map((project, index) => (
+            <motion.article
+              key={project.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              className="glass p-8 rounded-[2.5rem] border border-white/5 relative group hover:border-brand-primary/20 transition-all overflow-hidden flex flex-col items-center"
+              transition={{ delay: index * 0.08 }}
+              className="glass rounded-[2.5rem] border border-white/5 overflow-hidden group hover:border-brand-primary/20 transition-all"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              
-              <div className="w-full aspect-video rounded-2xl overflow-hidden mb-6 bg-white/5 flex items-center justify-center p-6">
-                <img 
-                  src={client.logo} 
-                  alt={client.name} 
-                  className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 scale-90 group-hover:scale-100"
-                  referrerPolicy="no-referrer"
+              <div className="aspect-[16/10] overflow-hidden bg-white/5">
+                <img
+                  src={project.image.startsWith('/') ? project.image : `/${project.image.replace(/^\.\//, '')}`}
+                  alt={project.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
 
-              <div className="text-center relative z-10">
-                <h4 className="text-white font-display font-bold text-lg mb-1 group-hover:text-brand-primary transition-colors">
-                  {client.name}
-                </h4>
-                <div className="flex items-center justify-center gap-2">
-                  <span className="text-brand-primary font-mono text-[9px] uppercase tracking-widest">{client.industry}</span>
-                  <span className="w-1 h-1 bg-white/20 rounded-full" />
-                  <span className="text-white/40 font-mono text-[9px] uppercase tracking-widest">{client.location}</span>
+              <div className="p-8">
+                <div className="flex items-center justify-between gap-4 mb-5">
+                  <div>
+                    <div className="text-[10px] uppercase tracking-[0.3em] text-brand-primary font-bold mb-2">
+                      {project.category}
+                    </div>
+                    <h2 className="text-2xl font-display font-bold text-white">{project.title}</h2>
+                    <p className="text-white/40 text-sm mt-1">{project.client}</p>
+                  </div>
+                  {project.url && project.url !== '#' && (
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:text-brand-primary hover:border-brand-primary/40 transition-colors"
+                    >
+                      <ArrowUpRight size={18} />
+                    </a>
+                  )}
+                </div>
+
+                <p className="text-white/60 leading-relaxed mb-6">{project.description}</p>
+
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((technology) => (
+                    <span
+                      key={technology}
+                      className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[11px] uppercase tracking-widest text-white/60"
+                    >
+                      {technology}
+                    </span>
+                  ))}
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
 
-        {/* Call to Action */}
+        <div className="mt-24 mb-8 flex items-center gap-3">
+          <div className="w-12 h-[1px] bg-brand-primary" />
+          <span className="text-brand-primary font-mono text-xs font-bold uppercase tracking-[0.3em]">
+            Client Feedback
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {clientFeedback.map((feedback, index) => (
+            <motion.blockquote
+              key={feedback.client}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.08 }}
+              className="glass rounded-[2.5rem] border border-white/5 p-8 relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-40 h-40 bg-brand-primary/5 blur-[70px] rounded-full pointer-events-none" />
+              <div className="relative z-10">
+                <div className="text-5xl leading-none text-brand-primary/50 font-display mb-5">"</div>
+                <p className="text-white/70 text-lg leading-relaxed mb-8">{feedback.quote}</p>
+                <footer>
+                  <div className="text-white font-display font-bold text-xl">{feedback.client}</div>
+                  <div className="text-white/40 text-xs uppercase tracking-[0.25em] mt-2">{feedback.role}</div>
+                </footer>
+              </div>
+            </motion.blockquote>
+          ))}
+        </div>
+
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -117,17 +184,18 @@ export default function Testimony() {
           className="mt-32 glass p-16 rounded-[3rem] border border-white/5 text-center relative overflow-hidden"
         >
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-brand-primary/10 blur-[120px] rounded-full pointer-events-none" />
-          
+
           <MessageSquare className="mx-auto mb-8 text-brand-primary" size={48} />
           <h2 className="text-4xl md:text-6xl font-display font-bold text-white tracking-tighter mb-6">
-            BECOME OUR NEXT <br />
-            <span className="text-brand-primary">GLOBAL PARTNER</span>
+            READY TO BE THE <br />
+            <span className="text-brand-primary">NEXT CASE STUDY?</span>
           </h2>
           <p className="text-white/50 text-lg mb-10 max-w-xl mx-auto">
-            Join our network of industry leaders and experience the power of innovative digital solutions.
+            If you want your product, institution, or operation featured here next, the next step is a scoped build,
+            not another placeholder deck.
           </p>
           <button className="px-10 py-5 bg-brand-primary text-black font-display font-bold uppercase tracking-widest rounded-full hover:scale-105 transition-transform">
-            Partner with Us
+            Start a Project
           </button>
         </motion.div>
       </div>
