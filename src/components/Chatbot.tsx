@@ -23,6 +23,12 @@ interface ChatBotProps {
   onClose?: () => void;
 }
 
+interface ReplyPayload {
+  text: string;
+  waUrl: string;
+  subOptions?: string[];
+}
+
 function useIsMobile(): boolean {
   const [isMobile, setIsMobile] = useState(() =>
     typeof window !== 'undefined' ? window.innerWidth < 768 : false,
@@ -155,7 +161,7 @@ const WhatsAppCTA: React.FC<{ url: string }> = ({ url }) => (
     }}
   >
     <WAIcon />
-    Chat on WhatsApp ->
+    Chat on WhatsApp {'->'}
   </motion.a>
 );
 
@@ -270,7 +276,7 @@ export const ChatBot: React.FC<ChatBotProps> = ({
     );
   };
 
-  const askGemini = async (text: string) => {
+  const askGemini = async (text: string): Promise<ReplyPayload | null> => {
     const apiKey = process.env.GEMINI_API_KEY || '';
     if (!apiKey) {
       return null;
@@ -302,7 +308,7 @@ export const ChatBot: React.FC<ChatBotProps> = ({
     }
   };
 
-  const buildFallbackReply = (text: string) => {
+  const buildFallbackReply = (text: string): ReplyPayload => {
     const match = findMatch(text);
     return {
       text: match?.response ?? fallbackResponse,
