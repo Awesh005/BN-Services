@@ -388,26 +388,29 @@ export const ChatBot: React.FC<ChatBotProps> = ({
 
   return (
     <>
-      {isMobile && (
-        <div className="fixed right-6 bottom-24 z-[1001]">
-          <motion.button
-            type="button"
-            onClick={() => setIsOpen(!isOpen)}
-            initial={{ opacity: 0, scale: 0.7, y: 12 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.94 }}
-            className="relative w-14 h-14 rounded-full border border-white/10 bg-[#050505] shadow-[0_0_24px_rgba(59,130,246,0.35)] flex items-center justify-center overflow-hidden"
-            aria-label={isOpen ? 'Close AI chat' : 'Open AI chat'}
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 via-purple-500/20 to-cyan-400/30" />
-            <div className="absolute inset-0 rounded-full border border-cyan-400/30 animate-pulse" />
-            <div className="relative z-10 flex items-center justify-center">
-              {isOpen ? <X size={20} color="white" /> : <AIAvatar size="sm" />}
-            </div>
-          </motion.button>
-        </div>
-      )}
+      
+        <div className="fixed right-6 bottom-[6.5rem] z-[1002] flex items-center justify-center">
+  {/* Pulse rings matching WhatsApp style */}
+  <div className="absolute w-16 h-16 border-2 border-blue-500/40 rounded-full animate-pulse" />
+  <div className="absolute w-16 h-16 border-2 border-cyan-400/30 rounded-full animate-pulse [animation-delay:1s]" />
+
+  <motion.button
+    type="button"
+    onClick={() => setIsOpen(!isOpen)}
+    initial={{ opacity: 0, scale: 0.7, y: 12 }}
+    animate={{ opacity: 1, scale: 1, y: 0 }}
+    whileHover={{ scale: 1.15, transition: { duration: 0.4 } }}
+    whileTap={{ scale: 0.9 }}
+    className="relative z-10 w-16 h-16 rounded-full border border-white/10 bg-[#050505] shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] flex items-center justify-center overflow-hidden transition-all duration-300"
+    aria-label={isOpen ? 'Close AI chat' : 'Open AI chat'}
+  >
+    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 via-purple-500/20 to-cyan-400/30" />
+    <div className="absolute inset-0 rounded-full border border-cyan-400/30 animate-pulse" />
+    <div className="relative z-10 flex items-center justify-center">
+      {isOpen ? <X size={22} color="white" /> : <AIAvatar size="sm" />}
+    </div>
+  </motion.button>
+</div>
 
       <AnimatePresence>
         {isOpen && (

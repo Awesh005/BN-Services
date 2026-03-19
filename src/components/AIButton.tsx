@@ -51,7 +51,7 @@ export const AIButton: React.FC<AIButtonProps> = ({ onClick, className = '' }) =
       onClick={onClick}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className={`hidden lg:flex relative group items-center justify-center p-[1.5px] rounded-full overflow-hidden transition-all duration-300 shadow-[0_0_10px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] ${className}`}
+      className={`flex relative group items-center justify-center p-[1.5px] rounded-full overflow-hidden transition-all duration-300 shadow-[0_0_10px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] ${className}`}
     >
       <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 via-pink-500 to-cyan-400 animate-rotate-gradient opacity-80 group-hover:opacity-100" />
 
