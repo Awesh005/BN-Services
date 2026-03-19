@@ -387,23 +387,45 @@ export const ChatBot: React.FC<ChatBotProps> = ({
       };
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.92, y: 16 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.92, y: 16 }}
-          transition={{ duration: 0.22, ease: 'easeOut' }}
-          style={{
-            ...chatStyle,
-            background: '#050505',
-            border: '1px solid rgba(255,255,255,0.1)',
-            boxShadow: '0 25px 60px rgba(0,0,0,0.5)',
-            display: 'flex',
-            flexDirection: 'column',
-            overflow: 'hidden',
-          }}
-        >
+    <>
+      {isMobile && (
+        <div className="fixed right-6 bottom-24 z-[1001]">
+          <motion.button
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
+            initial={{ opacity: 0, scale: 0.7, y: 12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.94 }}
+            className="relative w-14 h-14 rounded-full border border-white/10 bg-[#050505] shadow-[0_0_24px_rgba(59,130,246,0.35)] flex items-center justify-center overflow-hidden"
+            aria-label={isOpen ? 'Close AI chat' : 'Open AI chat'}
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 via-purple-500/20 to-cyan-400/30" />
+            <div className="absolute inset-0 rounded-full border border-cyan-400/30 animate-pulse" />
+            <div className="relative z-10 flex items-center justify-center">
+              {isOpen ? <X size={20} color="white" /> : <AIAvatar size="sm" />}
+            </div>
+          </motion.button>
+        </div>
+      )}
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.92, y: 16 }}
+            transition={{ duration: 0.22, ease: 'easeOut' }}
+            style={{
+              ...chatStyle,
+              background: '#050505',
+              border: '1px solid rgba(255,255,255,0.1)',
+              boxShadow: '0 25px 60px rgba(0,0,0,0.5)',
+              display: 'flex',
+              flexDirection: 'column',
+              overflow: 'hidden',
+            }}
+          >
           <div
             style={{
               padding: isMobile ? '16px 20px' : '24px',
@@ -753,9 +775,10 @@ export const ChatBot: React.FC<ChatBotProps> = ({
               50% { transform: translateY(-4px); }
             }
           `}</style>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

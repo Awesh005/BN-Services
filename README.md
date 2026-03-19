@@ -108,3 +108,6 @@ Noted warning:
 
 - `src/router/AppRouter.tsx` exists, but the active route setup currently lives in `src/App.tsx`.
 - Some packages such as `better-sqlite3` and `express` are present in dependencies, but this repository currently behaves as a frontend Vite app.
+
+
+content added

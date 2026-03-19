@@ -297,29 +297,40 @@ export function Navbar() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden mt-3 glass rounded-3xl p-6 flex flex-col gap-4 border border-white/10 overflow-hidden"
+            className="md:hidden mt-3 glass rounded-3xl p-6 flex flex-col gap-4 border border-white/10 max-h-[75vh] overflow-y-auto"
           >
             <AIButton onClick={handleAIChatToggle} className="w-fit" />
             {navItems.map((item) => (
               <div key={item.name} className="flex flex-col">
-                <button 
-                  onClick={() => {
-                    if (item.name === 'Services' || item.name === 'Company') {
+                {item.name === 'Services' || item.name === 'Company' ? (
+                  <button 
+                    onClick={() => {
                       setActiveAccordion(activeAccordion === item.name ? null : item.name);
-                    } else if (item.external) {
-                      window.open(item.path, '_blank', 'noopener,noreferrer');
-                      setIsOpen(false);
-                    } else {
-                      setIsOpen(false);
-                    }
-                  }}
-                  className="flex items-center justify-between w-full text-sm font-display font-bold uppercase tracking-[0.2em] text-white/60 hover:text-brand-primary transition-colors py-2"
-                >
-                  {item.name}
-                  {(item.name === 'Services' || item.name === 'Company') && (
+                    }}
+                    className="flex items-center justify-between w-full text-sm font-display font-bold uppercase tracking-[0.2em] text-white/60 hover:text-brand-primary transition-colors py-2"
+                  >
+                    {item.name}
                     <ChevronDown size={16} className={`transition-transform ${activeAccordion === item.name ? 'rotate-180' : ''}`} />
-                  )}
-                </button>
+                  </button>
+                ) : item.external ? (
+                  <a
+                    href={item.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center justify-between w-full text-sm font-display font-bold uppercase tracking-[0.2em] text-white/60 hover:text-brand-primary transition-colors py-2"
+                  >
+                    {item.name}
+                  </a>
+                ) : (
+                  <Link
+                    to={item.path}
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center justify-between w-full text-sm font-display font-bold uppercase tracking-[0.2em] text-white/60 hover:text-brand-primary transition-colors py-2"
+                  >
+                    {item.name}
+                  </Link>
+                )}
                 
                 {item.name === 'Services' && activeAccordion === 'Services' && (
                   <motion.div 
