@@ -18,11 +18,11 @@ import { slugify } from '../data/servicesData';
 
 const services: Service[] = [
   {
-    title: "Website Development",
-    description: "Custom, responsive, and SEO-friendly websites tailored to your brand.",
+    title: "Web Applications",
+    description: "Scalable, high-performance web solutions across static, dynamic, and customized platforms.",
     icon: Globe,
     color: "from-blue-500 to-cyan-400",
-    features: ["Custom Solutions", "Expert Team", "24/7 Support"]
+    features: ["Static Websites", "Dynamic Sites", "Customized (E-commerce, etc.)"]
   },
   {
     title: "Mobile App Development",

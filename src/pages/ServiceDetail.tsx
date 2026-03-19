@@ -6,6 +6,7 @@ import {
   ArrowLeft, ExternalLink, MessageSquare, Award 
 } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
+import { PricingTable } from '../components/PricingTable';
 
 export const ServiceDetail: React.FC = () => {
   const { serviceId } = useParams<{ serviceId: string }>();
@@ -207,6 +208,9 @@ export const ServiceDetail: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Pricing Table for Web Applications */}
+      {serviceId === 'web-applications' && <PricingTable />}
 
       {/* Process Section */}
       <section className="py-24 px-6">

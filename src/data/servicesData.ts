@@ -28,14 +28,14 @@ export const servicesData: Record<string, ServiceDetail> = {
     title: 'Web Applications',
     category: 'Software',
     description: 'Scalable, high-performance web solutions tailored to your business needs.',
-    longDescription: 'Our web application development services focus on creating robust, scalable, and secure platforms that drive business growth. We leverage the latest technologies to build responsive and intuitive interfaces that provide a seamless user experience across all devices.',
+    longDescription: 'Our web application development services provide comprehensive solutions across three core areas: Static Websites for fast and secure informational presence, Dynamic Sites for interactive and data-driven experiences, and Customized Sites tailored for complex needs like E-commerce, CRM, and ERP systems.',
     benefits: ['Increased operational efficiency', 'Scalability for future growth', 'Enhanced user engagement', 'Cross-platform compatibility'],
-    useCases: ['E-commerce platforms', 'Customer relationship management (CRM) systems', 'Enterprise resource planning (ERP) software', 'Content management systems (CMS)'],
+    useCases: ['Static Informational Websites', 'Dynamic Data-Driven Platforms', 'Customized E-commerce Solutions', 'Enterprise Resource Planning (ERP)', 'Content Management Systems (CMS)'],
     industries: ['Retail', 'Healthcare', 'Finance', 'Education'],
     features: [
-      { title: 'Responsive Design', description: 'Optimized for mobile, tablet, and desktop.', icon: Monitor },
-      { title: 'Secure Architecture', description: 'Built with industry-standard security protocols.', icon: Shield },
-      { title: 'Cloud Integration', description: 'Seamlessly integrated with AWS, Azure, or Google Cloud.', icon: Cloud }
+      { title: 'Static Website', description: 'Fast, secure, and cost-effective websites for informational purposes.', icon: Globe },
+      { title: 'Dynamic Site', description: 'Interactive platforms with database integration and real-time updates.', icon: Database },
+      { title: 'Customized Site', description: 'Tailored solutions like E-commerce, ERP, and specialized business tools.', icon: Settings }
     ],
     process: [
       { step: '01', title: 'Requirement Analysis', description: 'Understanding your business goals and user needs.' },

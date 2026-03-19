@@ -53,7 +53,11 @@ export const Home: React.FC = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/20 to-brand-secondary/20 rounded-3xl blur-2xl" />
             <div className="relative h-full w-full glass rounded-3xl overflow-hidden flex items-center justify-center">
-              <div className="text-8xl font-display font-bold opacity-10 select-none">HUB</div>
+              <img
+                src="/company.png"
+                alt="BN INTELHUB company"
+                className="h-full w-full object-cover"
+              />
             </div>
           </motion.div>
         </div>
