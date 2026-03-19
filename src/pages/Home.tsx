@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Hero } from '../components/Hero';
 import { Services } from '../components/Services';
 import { TechStackGrid } from '../components/TechStackGrid';
-import { EarthGlobe } from '../components/three/EarthGlobe';
 import { motion } from 'motion/react';
+
+const EarthGlobe = lazy(() =>
+  import('../components/three/EarthGlobe').then((module) => ({ default: module.EarthGlobe })),
+);
 
 export const Home: React.FC = () => {
   return (
@@ -58,7 +61,9 @@ export const Home: React.FC = () => {
 
       {/* Global Presence Section */}
       <section className="py-24 overflow-hidden">
-        <EarthGlobe />
+        <Suspense fallback={<div className="h-[700px] bg-bg-dark" aria-hidden="true" />}>
+          <EarthGlobe />
+        </Suspense>
       </section>
 
       {/* Contact Section Placeholder */}

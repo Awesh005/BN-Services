@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { slugify } from '../data/servicesData';
 import { AIButton } from './AIButton';
-import { ChatBot } from './ChatBot';
+import { ChatBot } from './Chatbot';
 
 const serviceCategories = [
   {
