@@ -17,17 +17,14 @@ export const FounderMessage: React.FC = () => {
             >
               <div className="aspect-[4/5] rounded-[4rem] overflow-hidden glass border border-white/10 relative">
                 <img 
-                  src="https://picsum.photos/seed/founder/800/1000" 
+                  src="/direct3.png" 
                   alt="Founder" 
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-transparent to-transparent" />
               </div>
-              <div className="absolute -bottom-8 -right-8 glass p-10 rounded-3xl border border-white/10 backdrop-blur-2xl">
-                <h3 className="text-2xl font-display font-bold text-brand-primary">John Doe</h3>
-                <p className="text-white/40 uppercase tracking-widest text-xs mt-1">Founder & CEO</p>
-              </div>
+              
             </motion.div>
 
             {/* Message Section */}
@@ -61,7 +58,7 @@ export const FounderMessage: React.FC = () => {
               </div>
               
               <div className="mt-12 pt-12 border-t border-white/10">
-                <div className="font-display text-3xl text-white/90">John Doe</div>
+                <div className="font-display text-3xl text-white/90">MOHAN PRAKASH</div>
                 <div className="text-brand-primary font-bold uppercase tracking-widest text-xs mt-2">Founder, BN INTELHUB</div>
                 
                 {/* Signature Placeholder */}
