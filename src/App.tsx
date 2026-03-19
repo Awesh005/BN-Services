@@ -15,6 +15,7 @@ import { Insights } from './pages/Insights';
 import Testimony from './pages/Testimony';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { ChatBot } from './components/ChatBot';
+import { Preloader } from './components/Preloader';
 
 export default function App() {
   const { scrollYProgress } = useScroll();
@@ -26,6 +27,7 @@ export default function App() {
 
   return (
     <Router>
+      <Preloader />
       <ClickSpark>
         <div className="relative min-h-screen bg-bg-dark selection:bg-brand-primary/30">
           {/* Progress Bar */}

@@ -1,8 +1,22 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, MessageSquare, Globe, Sparkles } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Mail, Phone, MapPin, Send, MessageSquare, Globe, Sparkles, Loader2, CheckCircle2 } from 'lucide-react';
 
 export const Contact: React.FC = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate API call
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
+
   return (
     <div className="min-h-screen bg-bg-dark text-white pt-32 pb-20 overflow-hidden relative">
       {/* Futuristic Background Elements */}
@@ -62,6 +76,7 @@ export const Contact: React.FC = () => {
                   <h3 className="text-xl font-bold mb-2">Direct Contact</h3>
                   <p className="text-white/50 leading-relaxed">
                     +91 8936078905<br />
+                    +91 90412 89863<br />
                     Mon - Sat, 9:00 AM - 6:00 PM
                   </p>
                 </div>
@@ -89,54 +104,103 @@ export const Contact: React.FC = () => {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="glass p-10 rounded-[3rem] border border-white/10 relative overflow-hidden"
+            className="glass p-10 rounded-[3rem] border border-white/10 relative overflow-hidden flex flex-col justify-center min-h-[500px]"
           >
             <div className="absolute top-0 right-0 p-8 opacity-10">
               <Sparkles size={120} className="text-brand-primary" />
             </div>
             
-            <form className="space-y-6 relative z-10">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-widest text-white/40 font-bold ml-2">Full Name</label>
-                  <input 
-                    type="text" 
-                    placeholder="John Doe"
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-primary/50 transition-all text-white"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-widest text-white/40 font-bold ml-2">Email Address</label>
-                  <input 
-                    type="email" 
-                    placeholder="john@example.com"
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-primary/50 transition-all text-white"
-                  />
-                </div>
-              </div>
+            <AnimatePresence mode="wait">
+              {isSuccess ? (
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center space-y-8 py-12 relative z-10"
+                >
+                  <div className="w-20 h-20 bg-brand-primary/20 rounded-full flex items-center justify-center mx-auto">
+                    <CheckCircle2 size={40} className="text-brand-primary" />
+                  </div>
+                  <div className="space-y-4">
+                    <h2 className="text-3xl font-display font-bold">Message Received!</h2>
+                    <p className="text-white/60 max-w-sm mx-auto">
+                      Thank you for reaching out. Our team will review your message and respond shortly.
+                    </p>
+                  </div>
+                  <button 
+                    onClick={() => setIsSuccess(false)}
+                    className="px-8 py-4 bg-white/5 border border-white/10 rounded-2xl text-sm font-bold uppercase tracking-widest hover:bg-white/10 transition-all"
+                  >
+                    Send Another Message
+                  </button>
+                </motion.div>
+              ) : (
+                <motion.form 
+                  key="form"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onSubmit={handleSubmit}
+                  className="space-y-6 relative z-10"
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-xs uppercase tracking-widest text-white/40 font-bold ml-2">Full Name</label>
+                      <input 
+                        required
+                        type="text" 
+                        placeholder="John Doe"
+                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-primary/50 transition-all text-white"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs uppercase tracking-widest text-white/40 font-bold ml-2">Email Address</label>
+                      <input 
+                        required
+                        type="email" 
+                        placeholder="john@example.com"
+                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-primary/50 transition-all text-white"
+                      />
+                    </div>
+                  </div>
 
-              <div className="space-y-2">
-                <label className="text-xs uppercase tracking-widest text-white/40 font-bold ml-2">Subject</label>
-                <input 
-                  type="text" 
-                  placeholder="How can we help?"
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-primary/50 transition-all text-white"
-                />
-              </div>
+                  <div className="space-y-2">
+                    <label className="text-xs uppercase tracking-widest text-white/40 font-bold ml-2">Subject</label>
+                    <input 
+                      required
+                      type="text" 
+                      placeholder="How can we help?"
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-primary/50 transition-all text-white"
+                    />
+                  </div>
 
-              <div className="space-y-2">
-                <label className="text-xs uppercase tracking-widest text-white/40 font-bold ml-2">Message</label>
-                <textarea 
-                  rows={5}
-                  placeholder="Tell us about your project..."
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-primary/50 transition-all text-white resize-none"
-                />
-              </div>
+                  <div className="space-y-2">
+                    <label className="text-xs uppercase tracking-widest text-white/40 font-bold ml-2">Message</label>
+                    <textarea 
+                      required
+                      rows={5}
+                      placeholder="Tell us about your project..."
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-primary/50 transition-all text-white resize-none"
+                    />
+                  </div>
 
-              <button className="w-full py-5 bg-gradient-to-r from-brand-primary to-brand-secondary text-black font-display font-bold uppercase tracking-widest rounded-2xl flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_0_30px_rgba(34,211,238,0.3)]">
-                Send Message <Send size={18} />
-              </button>
-            </form>
+                  <button 
+                    disabled={isSubmitting}
+                    className="w-full py-5 bg-gradient-to-r from-brand-primary to-brand-secondary text-black font-display font-bold uppercase tracking-widest rounded-2xl flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_0_30px_rgba(34,211,238,0.3)] disabled:opacity-50 disabled:hover:scale-100"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        Sending <Loader2 size={18} className="animate-spin" />
+                      </>
+                    ) : (
+                      <>
+                        Send Message <Send size={18} />
+                      </>
+                    )}
+                  </button>
+                </motion.form>
+              )}
+            </AnimatePresence>
           </motion.div>
         </div>
       </div>
