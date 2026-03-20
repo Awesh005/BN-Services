@@ -1,20 +1,65 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Mail, Phone, MapPin, Send, MessageSquare, Globe, Sparkles, Loader2, CheckCircle2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Sparkles, Loader2, CheckCircle2 } from 'lucide-react';
+
+const GOOGLE_FORM_ACTION =
+  'https://docs.google.com/forms/d/e/1FAIpQLSfTeCeSo3_2OL0IdqmBanDS06HgKMNWwf26LkOjgc5awMb5uA/formResponse';
+
+type ContactFormState = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
 
 export const Contact: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const hasSubmittedRef = useRef(false);
+  const [formData, setFormData] = useState<ContactFormState>({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const field = e.target.dataset.field as keyof ContactFormState | undefined;
+
+    if (!field) {
+      return;
+    }
+
+    setFormData(prev => ({ ...prev, [field]: e.target.value }));
+  };
+
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      email: '',
+      subject: '',
+      message: ''
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-    }, 2000);
+    hasSubmittedRef.current = true;
+    e.currentTarget.submit();
+  };
+
+  const handleFormResponseLoad = () => {
+    if (!hasSubmittedRef.current) {
+      return;
+    }
+
+    hasSubmittedRef.current = false;
+    setIsSubmitting(false);
+    setIsSuccess(true);
+    resetForm();
   };
 
   return (
@@ -27,6 +72,12 @@ export const Contact: React.FC = () => {
           <div className="w-full h-full" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
         </div>
       </div>
+      <iframe
+        title="contact-google-form-submit"
+        name="hidden_contact_form_iframe"
+        className="hidden"
+        onLoad={handleFormResponseLoad}
+      />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-20">
@@ -128,7 +179,10 @@ export const Contact: React.FC = () => {
                     </p>
                   </div>
                   <button 
-                    onClick={() => setIsSuccess(false)}
+                    onClick={() => {
+                      setIsSuccess(false);
+                      resetForm();
+                    }}
                     className="px-8 py-4 bg-white/5 border border-white/10 rounded-2xl text-sm font-bold uppercase tracking-widest hover:bg-white/10 transition-all"
                   >
                     Send Another Message
@@ -140,7 +194,10 @@ export const Contact: React.FC = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
+                  action={GOOGLE_FORM_ACTION}
+                  method="POST"
                   onSubmit={handleSubmit}
+                  target="hidden_contact_form_iframe"
                   className="space-y-6 relative z-10"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -148,7 +205,11 @@ export const Contact: React.FC = () => {
                       <label className="text-xs uppercase tracking-widest text-white/40 font-bold ml-2">Full Name</label>
                       <input 
                         required
+                        name="entry.1878588055"
+                        data-field="name"
                         type="text" 
+                        value={formData.name}
+                        onChange={handleInputChange}
                         placeholder="John Doe"
                         className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-primary/50 transition-all text-white"
                       />
@@ -157,7 +218,11 @@ export const Contact: React.FC = () => {
                       <label className="text-xs uppercase tracking-widest text-white/40 font-bold ml-2">Email Address</label>
                       <input 
                         required
+                        name="entry.129275276"
+                        data-field="email"
                         type="email" 
+                        value={formData.email}
+                        onChange={handleInputChange}
                         placeholder="john@example.com"
                         className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-primary/50 transition-all text-white"
                       />
@@ -168,7 +233,11 @@ export const Contact: React.FC = () => {
                     <label className="text-xs uppercase tracking-widest text-white/40 font-bold ml-2">Subject</label>
                     <input 
                       required
+                      name="entry.993978936"
+                      data-field="subject"
                       type="text" 
+                      value={formData.subject}
+                      onChange={handleInputChange}
                       placeholder="How can we help?"
                       className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-primary/50 transition-all text-white"
                     />
@@ -178,7 +247,11 @@ export const Contact: React.FC = () => {
                     <label className="text-xs uppercase tracking-widest text-white/40 font-bold ml-2">Message</label>
                     <textarea 
                       required
+                      name="entry.1566106797"
+                      data-field="message"
                       rows={5}
+                      value={formData.message}
+                      onChange={handleInputChange}
                       placeholder="Tell us about your project..."
                       className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-primary/50 transition-all text-white resize-none"
                     />
