@@ -4,6 +4,7 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { motion, useScroll, useSpring } from 'motion/react';
 import ClickSpark from './components/ClickSpark';
+import SplashCursor from './components/SplashCursor';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { Preloader } from './components/Preloader';
 
@@ -46,6 +47,7 @@ export default function App() {
       <Preloader />
       <ClickSpark>
         <div className="relative min-h-screen bg-bg-dark selection:bg-brand-primary/30">
+          <SplashCursor />
           {/* Progress Bar */}
           <motion.div 
             className="fixed top-0 left-0 right-0 h-1 bg-brand-primary z-[100] origin-left" 

@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export function Hero() {
   return (
@@ -68,11 +69,14 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-6 pointer-events-auto"
         >
-          <button className="group relative px-10 py-5 bg-paper text-black font-mono font-bold uppercase tracking-wider rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-xl">
+          <Link
+            to="/contact"
+            className="group relative px-10 py-5 bg-paper text-black font-mono font-bold uppercase tracking-wider rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-xl"
+          >
             <span className="relative z-10 flex items-center gap-2">
               Start Your Journey <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </span>
-          </button>
+          </Link>
         </motion.div>
       </div>
 
